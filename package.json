@@ -9,6 +9,9 @@
     "styled-components",
     "css-in-js"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsup",
