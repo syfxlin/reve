@@ -3,11 +3,12 @@
   "version": "0.0.0-semantic-release",
   "description": "Support for css-prop-like API and flexible theme system for vanilla-extract.",
   "author": "Otstar Lin <i@ixk.me>",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "keywords": [
     "vanilla-extract",
     "styled-components",
-    "css-in-js"
+    "css-in-js",
+    "css"
   ],
   "publishConfig": {
     "access": "public"
@@ -27,6 +28,9 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/syfxlin/reve.git"
@@ -45,23 +49,23 @@
     "@vanilla-extract/css": "^1.12.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.15",
+    "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "@types/stylis": "^4.2.0",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "@vanilla-extract/vite-plugin": "^3.8.2",
-    "@vitejs/plugin-react": "^4.0.3",
-    "eslint": "^8.45.0",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "@vanilla-extract/vite-plugin": "^3.9.0",
+    "@vitejs/plugin-react": "^4.0.4",
+    "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "prettier": "^3.0.1",
+    "prettier": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsup": "^7.2.0",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "typescript": "^5.2.2",
+    "vite": "^4.4.9"
   }
 }

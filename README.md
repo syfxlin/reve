@@ -65,4 +65,4 @@ reve is written and maintained with the help of [Otstar Lin](https://ixk.me) and
 
 ![License](https://img.shields.io/github/license/syfxlin/reve.svg?style=flat-square)
 
-Released under the Apache License 2.0.
+Released under the MIT License.
