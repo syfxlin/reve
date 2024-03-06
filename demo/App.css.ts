@@ -1,4 +1,4 @@
-import { styled } from "../src/styled";
+import { styled } from "../src";
 import { theme } from "./theme.css.ts";
 
 export const container = styled.css`

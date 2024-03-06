@@ -10,21 +10,21 @@ export type DynamicTokens<K extends string = string> = {
 
 export type ReveTheme<C extends ReveThemeContract = ReveThemeContract> = C["static"] & C["dynamic"][keyof C["dynamic"]];
 
-export type ReveThemeContract<S extends StaticTokens = StaticTokens, D extends DynamicTokens = DynamicTokens> = {
+export interface ReveThemeContract<S extends StaticTokens = StaticTokens, D extends DynamicTokens = DynamicTokens> {
   static: S;
   dynamic: Record<string, D>;
-};
+}
 
-export const createReveTheme = <T extends ReveThemeContract = ReveThemeContract>(tokens: T): ReveTheme<T> => {
+export function createReveTheme<T extends ReveThemeContract = ReveThemeContract>(tokens: T): ReveTheme<T> {
   const entries = Object.entries(tokens.dynamic);
   if (entries.length) {
     const contract = createThemeContract(entries[0][1]);
     for (const [selector, values] of entries) {
-      // @ts-ignore
+      // @ts-expect-error
       createGlobalTheme(selector, contract, values);
     }
     return { ...tokens.static, ...contract } as ReveTheme<T>;
   } else {
     return { ...tokens.static } as ReveTheme<T>;
   }
-};
+}

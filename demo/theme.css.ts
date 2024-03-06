@@ -1,4 +1,4 @@
-import { createReveTheme } from "../src/theme";
+import { createReveTheme } from "../src";
 
 export const theme = createReveTheme({
   static: {

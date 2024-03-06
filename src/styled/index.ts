@@ -1,17 +1,23 @@
-import { compile, Element } from "stylis";
-import { generateIdentifier, globalFontFace, globalKeyframes, globalStyle } from "@vanilla-extract/css";
+import { Element, compile } from "stylis";
+import {
+  generateIdentifier,
+  globalFontFace,
+  globalKeyframes,
+  globalStyle,
+} from "@vanilla-extract/css";
 
-const _template = (tpl: TemplateStringsArray, expr: Array<string | number | boolean | null | undefined>) => {
+function _template(tpl: TemplateStringsArray, expr: Array<string | number | boolean | null | undefined>) {
   let output = tpl[0];
   for (let i = 1; i < tpl.length; i++) {
     const value = expr[i - 1];
-    output += typeof value === "string" || typeof value === "number" ? value : "";
+    output +=
+      typeof value === "string" || typeof value === "number" ? value : "";
     output += tpl[i];
   }
   return output;
-};
+}
 
-const _property = (name: string) => {
+function _property(name: string) {
   let value = "";
   let upper = false;
   for (let i = 0; i < name.length; i++) {
@@ -24,13 +30,13 @@ const _property = (name: string) => {
     }
   }
   return value;
-};
+}
 
-const _props = (element: Element): string => {
+function _props(element: Element): string {
   return [element.props].flat().join(",");
-};
+}
 
-const _styles = (element: Element | Element[]): any => {
+function _styles(element: Element | Element[]): any {
   const elements = Array.isArray(element) ? element : element.children;
   if (typeof elements === "string") {
     return {};
@@ -53,9 +59,9 @@ const _styles = (element: Element | Element[]): any => {
     }
   }
   return styles;
-};
+}
 
-const _compiled = (element: Element) => {
+function _compiled(element: Element) {
   // local
   if (element.type === "rule" && typeof element.children !== "string") {
     globalStyle(_props(element), _styles(element));
@@ -99,40 +105,40 @@ const _compiled = (element: Element) => {
     }
     globalKeyframes(_props(element), keyframes);
   }
-};
+}
 
-const css = (tpl: TemplateStringsArray, ...expr: Array<string | number | boolean | null | undefined>) => {
+function css(tpl: TemplateStringsArray, ...expr: Array<string | number | boolean | null | undefined>) {
   const identifier = generateIdentifier();
   const elements = compile(`.${identifier} { ${_template(tpl, expr)} }`);
   for (const element of elements) {
     _compiled(element);
   }
   return identifier;
-};
+}
 
-const global = (tpl: TemplateStringsArray, ...expr: Array<string | number | boolean | null | undefined>) => {
+function global(tpl: TemplateStringsArray, ...expr: Array<string | number | boolean | null | undefined>) {
   const elements = compile(_template(tpl, expr));
   for (const element of elements) {
     _compiled(element);
   }
-};
+}
 
-const fonts = (tpl: TemplateStringsArray, ...expr: Array<string | number | boolean | null | undefined>) => {
+function fonts(tpl: TemplateStringsArray, ...expr: Array<string | number | boolean | null | undefined>) {
   const identifier = generateIdentifier();
   const elements = compile(_template(tpl, expr));
-  const root = elements.find((e) => e.type === "@font-face");
+  const root = elements.find(e => e.type === "@font-face");
   if (root) {
     globalFontFace(identifier, _styles(root));
   } else {
     globalFontFace(identifier, _styles(elements));
   }
   return identifier;
-};
+}
 
-const keyframes = (tpl: TemplateStringsArray, ...expr: Array<string | number | boolean | null | undefined>) => {
+function keyframes(tpl: TemplateStringsArray, ...expr: Array<string | number | boolean | null | undefined>) {
   const identifier = generateIdentifier();
   const elements = compile(_template(tpl, expr));
-  const root = elements.find((e) => e.type === "@keyframes");
+  const root = elements.find(e => e.type === "@keyframes");
   if (root) {
     const keyframes: any = {};
     for (const element of root.children as Element[]) {
@@ -147,6 +153,6 @@ const keyframes = (tpl: TemplateStringsArray, ...expr: Array<string | number | b
     globalKeyframes(identifier, keyframes);
   }
   return identifier;
-};
+}
 
 export const styled = { css, global, fonts, keyframes };
