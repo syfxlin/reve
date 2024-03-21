@@ -61,7 +61,7 @@
     "@types/stylis": "^4.2.5",
     "@vanilla-extract/vite-plugin": "^4.0.4",
     "@vitejs/plugin-react": "^4.2.1",
-    "bunchee": "^4.4.8",
+    "bunchee": "^5.0.0",
     "eslint": "^8.57.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
